@@ -124,6 +124,11 @@ missing_values <- is.na ( activdata$steps)
 intervals_w_missing_vals <- activdata$interval[missing_values]
 activdata_imp <- activdata
 activdata_imp$steps[missing_values] <- avg_ints$avg_steps_at_interval [match ( intervals_w_missing_vals, avg_ints$interval )]
+```
+
+Original set:
+
+```r
 head(activdata)
 ```
 
@@ -136,6 +141,8 @@ head(activdata)
 ## 5    NA 2012-10-01       20
 ## 6    NA 2012-10-01       25
 ```
+
+After imputing:
 
 ```r
 head(activdata_imp)
@@ -158,9 +165,9 @@ total_steps_perday_imp<-sapply(split(activdata_imp$steps, activdata_imp$date) ,s
 hist ( total_steps_perday_imp )
 ```
 
-<img src="PA1_template_files/figure-html/unnamed-chunk-12-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />
+<img src="PA1_template_files/figure-html/unnamed-chunk-14-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />
 
-Calculate and report the mean and median
++ Calculate and report the mean and median after imputing
 
 ```r
 mean_steps_perday_imp <- mean (total_steps_perday_imp)
@@ -206,4 +213,4 @@ plot ( names(avg_steps_at_interval), avg_steps_imp_weekdays, type="l", xlab="at 
 plot ( names(avg_steps_at_interval), avg_steps_imp_weekend, type="l", xlab="at interval", ylab="avg steps", main='Activity at weekends')
 ```
 
-<img src="PA1_template_files/figure-html/unnamed-chunk-16-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />
+<img src="PA1_template_files/figure-html/unnamed-chunk-18-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />

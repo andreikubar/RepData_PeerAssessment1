@@ -76,7 +76,15 @@ missing_values <- is.na ( activdata$steps)
 intervals_w_missing_vals <- activdata$interval[missing_values]
 activdata_imp <- activdata
 activdata_imp$steps[missing_values] <- avg_ints$avg_steps_at_interval [match ( intervals_w_missing_vals, avg_ints$interval )]
+```
+
+Original set:
+```{r echo=TRUE}
 head(activdata)
+```
+
+After imputing:
+```{r echo=TRUE}
 head(activdata_imp)
 ```
 
@@ -86,7 +94,7 @@ total_steps_perday_imp<-sapply(split(activdata_imp$steps, activdata_imp$date) ,s
 hist ( total_steps_perday_imp )
 ```
 
-Calculate and report the mean and median
++ Calculate and report the mean and median after imputing
 ```{r echo=TRUE}
 mean_steps_perday_imp <- mean (total_steps_perday_imp)
 print(mean_steps_perday_imp)
