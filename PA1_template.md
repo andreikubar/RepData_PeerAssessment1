@@ -68,7 +68,17 @@ plot ( names(avg_steps_at_interval), avg_steps_at_interval, type="l", xlab="at i
 ```
 
 <img src="PA1_template_files/figure-html/unnamed-chunk-7-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />
+2. Find the 5-minute interval, which on average across all the days in the dataset, contains the maximum number of steps:
 
+```r
+avg_ints <-  as.data.frame ( cbind (interval = (names(avg_steps_at_interval)) , avg_steps_at_interval = as.data.frame(avg_steps_at_interval) , stringsAsFactors=FALSE ) )
+a<-avg_ints$interval[avg_ints$avg_steps_at_interval == max (avg_ints$avg_steps_at_interval)]
+print(a)
+```
+
+```
+## [1] "835"
+```
 ## Imputing missing values
 1. Calculate and report the total number of missing values in the dataset
 
@@ -138,7 +148,7 @@ total_steps_perday_imp<-sapply(split(activdata_imp$steps, activdata_imp$date) ,s
 hist ( total_steps_perday_imp )
 ```
 
-<img src="PA1_template_files/figure-html/unnamed-chunk-11-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />
+<img src="PA1_template_files/figure-html/unnamed-chunk-12-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />
 Calculate and report the mean and median
 
 ```r
@@ -183,4 +193,4 @@ plot ( names(avg_steps_at_interval), avg_steps_imp_weekdays, type="l", xlab="at 
 plot ( names(avg_steps_at_interval), avg_steps_imp_weekend, type="l", xlab="at interval", ylab="avg steps", main='Activity at weekends')
 ```
 
-<img src="PA1_template_files/figure-html/unnamed-chunk-15-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />
+<img src="PA1_template_files/figure-html/unnamed-chunk-16-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />

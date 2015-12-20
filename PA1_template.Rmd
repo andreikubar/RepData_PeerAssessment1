@@ -44,7 +44,12 @@ avg_steps_at_interval <- sapply ( split (activdata$steps, activdata$interval), m
 ```{r fig.align='left' } 
 plot ( names(avg_steps_at_interval), avg_steps_at_interval, type="l", xlab="at interval", ylab="avg steps")
 ```
-
+2. Find the 5-minute interval, which on average across all the days in the dataset, contains the maximum number of steps:
+```{r echo=TRUE}
+avg_ints <-  as.data.frame ( cbind (interval = (names(avg_steps_at_interval)) , avg_steps_at_interval = as.data.frame(avg_steps_at_interval) , stringsAsFactors=FALSE ) )
+a<-avg_ints$interval[avg_ints$avg_steps_at_interval == max (avg_ints$avg_steps_at_interval)]
+print(a)
+```
 ## Imputing missing values
 1. Calculate and report the total number of missing values in the dataset
 ```{r echo=TRUE}
