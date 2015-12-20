@@ -22,13 +22,13 @@ summary(activdata)
 
 
 ## What is mean total number of steps taken per day?
-1. Calculate total steps per day  
++ Calculate total steps per day  
 
 ```r
 total_steps_perday<-sapply(split(activdata$steps, activdata$date) ,sum ,na.rm=TRUE)
 ```
 
-2. Make a histogram of the total number of steps taken each day  
++ Make a histogram of the total number of steps taken each day  
 
 ```r
 hist ( total_steps_perday )
@@ -36,7 +36,7 @@ hist ( total_steps_perday )
 
 <img src="PA1_template_files/figure-html/unnamed-chunk-3-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />
 
-3. Calculate mean steps taken each day  
++ Calculate mean steps taken each day  
 
 ```r
 mean_steps_perday <- mean (total_steps_perday)
@@ -47,7 +47,7 @@ print(mean_steps_perday)
 ## [1] 9354.23
 ```
 
-4. Calculate median steps taken each day  
++ Calculate median steps taken each day  
 
 ```r
 med_steps_perday <- median (total_steps_perday)
@@ -60,13 +60,13 @@ print (med_steps_perday)
 
 ## What is the average daily activity pattern?
 
-1. Calculate average steps at each interval
++ Calculate average steps at each interval
 
 ```r
 avg_steps_at_interval <- sapply ( split (activdata$steps, activdata$interval), mean, na.rm = TRUE)
 ```
 
-2. Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
++ Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 ```r
 plot ( names(avg_steps_at_interval), avg_steps_at_interval, type="l", xlab="at interval", ylab="avg steps")
@@ -74,7 +74,7 @@ plot ( names(avg_steps_at_interval), avg_steps_at_interval, type="l", xlab="at i
 
 <img src="PA1_template_files/figure-html/unnamed-chunk-7-1.png" title="" alt="" style="display: block; margin: auto auto auto 0;" />
 
-   Find the 5-minute interval, which on average across all the days in the dataset, contains the maximum number of steps:
++ Find the 5-minute interval, which on average across all the days in the dataset, contains the maximum number of steps:
 
 ```r
 avg_ints <-  as.data.frame ( cbind (interval = (names(avg_steps_at_interval)) , avg_steps_at_interval = as.data.frame(avg_steps_at_interval) , stringsAsFactors=FALSE ) )
@@ -87,7 +87,7 @@ print(a)
 ```
 
 ## Imputing missing values
-1. Calculate and report the total number of missing values in the dataset
++ Calculate and report the total number of missing values in the dataset
 
 ```r
 s<- summary( as.factor (activdata$steps ))
@@ -100,7 +100,7 @@ print ( na_vals )
 ## 2304
 ```
 
-2. Get the mean values for the given interval to replace missing values
++ Get the mean values for the given interval to replace missing values
 
 ```r
 avg_ints <-  as.data.frame ( cbind (interval = (names(avg_steps_at_interval)) , avg_steps_at_interval = as.data.frame(avg_steps_at_interval) ) )
@@ -117,7 +117,7 @@ head(avg_ints)
 ## 25       25             2.0943396
 ```
 
-3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
++ Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 ```r
 missing_values <- is.na ( activdata$steps)
@@ -151,7 +151,7 @@ head(activdata_imp)
 ## 6 2.0943396 2012-10-01       25
 ```
 
-4. Make a histogram of the total number of steps taken each day using imputed data set
++ Make a histogram of the total number of steps taken each day using imputed data set
 
 ```r
 total_steps_perday_imp<-sapply(split(activdata_imp$steps, activdata_imp$date) ,sum ,na.rm=TRUE)
