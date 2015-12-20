@@ -19,37 +19,43 @@ summary(activdata)
 ```{r echo=TRUE}
 total_steps_perday<-sapply(split(activdata$steps, activdata$date) ,sum ,na.rm=TRUE)
 ```
+
 2. Make a histogram of the total number of steps taken each day  
 ```{r fig.align='left', echo=TRUE}
 hist ( total_steps_perday )
-```  
+```
+
 3. Calculate mean steps taken each day  
 ```{r echo=TRUE}
 mean_steps_perday <- mean (total_steps_perday)
 print(mean_steps_perday)
 ```
+
 4. Calculate median steps taken each day  
 ```{r echo=TRUE}
 med_steps_perday <- median (total_steps_perday)
 print (med_steps_perday)
-
 ```
 
 ## What is the average daily activity pattern?
+
 1. Calculate average steps at each interval
 ```{r echo=TRUE}
 avg_steps_at_interval <- sapply ( split (activdata$steps, activdata$interval), mean, na.rm = TRUE)
 ```
+
 2. Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 ```{r fig.align='left' } 
 plot ( names(avg_steps_at_interval), avg_steps_at_interval, type="l", xlab="at interval", ylab="avg steps")
 ```
-2. Find the 5-minute interval, which on average across all the days in the dataset, contains the maximum number of steps:
+
+   Find the 5-minute interval, which on average across all the days in the dataset, contains the maximum number of steps:
 ```{r echo=TRUE}
 avg_ints <-  as.data.frame ( cbind (interval = (names(avg_steps_at_interval)) , avg_steps_at_interval = as.data.frame(avg_steps_at_interval) , stringsAsFactors=FALSE ) )
 a<-avg_ints$interval[avg_ints$avg_steps_at_interval == max (avg_ints$avg_steps_at_interval)]
 print(a)
 ```
+
 ## Imputing missing values
 1. Calculate and report the total number of missing values in the dataset
 ```{r echo=TRUE}
@@ -57,11 +63,13 @@ s<- summary( as.factor (activdata$steps ))
 na_vals <- s["NA's"]
 print ( na_vals )
 ```
+
 2. Get the mean values for the given interval to replace missing values
 ```{r echo=TRUE}
 avg_ints <-  as.data.frame ( cbind (interval = (names(avg_steps_at_interval)) , avg_steps_at_interval = as.data.frame(avg_steps_at_interval) ) )
 head(avg_ints)
 ```
+
 3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 ```{r echo=TRUE}
 missing_values <- is.na ( activdata$steps)
@@ -71,11 +79,13 @@ activdata_imp$steps[missing_values] <- avg_ints$avg_steps_at_interval [match ( i
 head(activdata)
 head(activdata_imp)
 ```
+
 4. Make a histogram of the total number of steps taken each day using imputed data set
 ```{r echo=TRUE, fig.align='left'}
 total_steps_perday_imp<-sapply(split(activdata_imp$steps, activdata_imp$date) ,sum ,na.rm=TRUE)
 hist ( total_steps_perday_imp )
 ```
+
 Calculate and report the mean and median
 ```{r echo=TRUE}
 mean_steps_perday_imp <- mean (total_steps_perday_imp)
@@ -83,10 +93,12 @@ print(mean_steps_perday_imp)
 med_steps_perday_imp <- median (total_steps_perday_imp)
 print (med_steps_perday_imp)
 ```
+
 Original mean was:
 ```{r echo=FALSE}
 print (mean_steps_perday)
 ```
+
 Original median was:
 ```{r echo=FALSE}
 print (med_steps_perday)
